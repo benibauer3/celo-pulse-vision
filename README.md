@@ -2,7 +2,7 @@
 <img width="1254" height="1254" alt="logo dash" src="https://github.com/user-attachments/assets/5362d5c9-18e4-4a83-a539-020c54b263d1" />
 
 
-**Celo Pulse Vision** is a real-time governance and monitoring dashboard designed for the Celo ecosystem. It transforms complex blockchain data into actionable insights, focusing on treasury transparency, validator health, and project progress tracking via MiniPay.
+**Celo Vision** is a real-time governance and monitoring dashboard designed for the Celo ecosystem. It transforms complex blockchain data into actionable insights, focusing on treasury transparency, validator health, and project progress tracking via MiniPay.
 
 **Live Application:** [celo-pulse-vision.lovable.app](https://celo-pulse-vision.lovable.app/)
 
