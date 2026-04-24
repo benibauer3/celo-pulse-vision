@@ -17,6 +17,11 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Celo Pulse — Treasury & Governance" },
       { name: "description", content: "Community Fund balance, approved proposals and ecosystem health for the Celo network." },
+      {
+        name: "talentapp:project_verification",
+        content:
+          "bfca6f6064a58d71b82c4d426eb7d59962dab592dedc60ebee0593eea710592db19f0cf193cd5bf5abebceee09d5979784035157b373facfba47a8b98fc8f500",
+      },
     ],
   }),
   component: Index,
