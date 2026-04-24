@@ -1,7 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
-import { fetchCommunityFundBalance, fetchValidatorCount, fetchLatestBlock } from "@/lib/celo";
+import {
+  fetchCommunityFundBalance,
+  fetchValidatorCount,
+  fetchLatestBlock,
+  fetchCeloPriceUsd,
+} from "@/lib/celo";
 import { truncateAddress } from "@/lib/minipay";
 import { SectionCard, ActionItem, Kpi } from "@/components/ui-celo";
 import { proposals } from "@/data/projects";
@@ -19,18 +24,33 @@ export const Route = createFileRoute("/")({
 function Index() {
   const { address, isConnected } = useAccount();
   const [balance, setBalance] = useState<string>("Carregando...");
+  const [balanceRaw, setBalanceRaw] = useState<number | null>(null);
+  const [price, setPrice] = useState<number | null>(null);
   const [validators, setValidators] = useState<number | null>(null);
   const [block, setBlock] = useState<bigint | null>(null);
 
   useEffect(() => {
-    fetchCommunityFundBalance().then(setBalance);
+    fetchCommunityFundBalance().then((r) => {
+      setBalance(r.formatted);
+      setBalanceRaw(r.raw);
+    });
+    fetchCeloPriceUsd().then(setPrice);
     fetchValidatorCount().then(setValidators);
     fetchLatestBlock().then(setBlock);
   }, []);
 
   const approved = proposals.filter((p) => p.status === "Executada" || p.status === "Adotada").length;
   const voting = proposals.filter((p) => p.status === "Em votação").length;
-  const totalCgps = 234; // most recent CGP number on Mondo
+  const totalCgps = 234;
+
+  const usdValue =
+    balanceRaw !== null && price !== null
+      ? new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        }).format(balanceRaw * price)
+      : null;
 
   return (
     <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 sm:pt-16 pb-24 md:pb-10">
@@ -39,16 +59,28 @@ function Index() {
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-celo-onyx/50 mb-4">
           Community Fund Balance
         </p>
-        <h1 className="font-serif text-6xl sm:text-8xl leading-none text-celo-onyx tracking-tight mb-5">
+        <h1 className="font-serif text-6xl sm:text-8xl leading-none text-celo-onyx tracking-tight mb-4">
           {balance}{" "}
           <span className="inline-block align-middle text-base sm:text-2xl font-bold bg-celo-yellow text-celo-onyx border-2 border-celo-onyx px-3 py-1.5 rounded ml-2">
             CELO
           </span>
         </h1>
+        <p className="font-serif text-2xl sm:text-3xl text-celo-onyx/80 mb-5">
+          {usdValue ? (
+            <>
+              ≈ <span className="font-bold">{usdValue}</span>{" "}
+              <span className="text-sm font-sans uppercase tracking-widest text-celo-onyx/50">
+                USD {price ? `· 1 CELO = $${price.toFixed(3)}` : ""}
+              </span>
+            </>
+          ) : (
+            <span className="text-celo-onyx/40 text-base">Calculando valor em USD…</span>
+          )}
+        </p>
         <p className="text-base sm:text-lg text-celo-onyx/70 max-w-2xl leading-relaxed mb-6">
           {isConnected
             ? `Bem-vindo. Sua carteira ${truncateAddress(address)} está conectada à rede Celo.`
-            : "Transparência absoluta. Monitorando o tesouro de governança da rede Celo em tempo real."}
+            : "Tesouro do Community Fund alimentado pelos epoch rewards do protocolo Celo."}
         </p>
         <div className="flex flex-wrap gap-3">
           <a
