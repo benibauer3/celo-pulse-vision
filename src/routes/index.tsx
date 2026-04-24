@@ -99,6 +99,14 @@ function Index() {
           >
             Ver no Celo Mondo ↗
           </a>
+          <a
+            href="https://docs.celo.org/home/protocol/epoch-rewards/community-fund"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-white text-celo-onyx border border-celo-onyx/30 px-5 py-2.5 text-sm font-semibold hover:bg-celo-cream transition"
+          >
+            Sobre o Community Fund ↗
+          </a>
         </div>
       </section>
 
