@@ -192,6 +192,76 @@ function Index() {
             />
           </SectionCard>
         </div>
+
+        {/* On-chain governance data — CeloPulseGovernance contract */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <SectionCard
+            title={`Health Reports · On-chain${
+              governance.reportsCount !== null ? ` (${governance.reportsCount})` : ""
+            }`}
+            action={
+              <a
+                href={`https://celoscan.io/address/${governance.contractAddress}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold text-celo-onyx/70 hover:text-celo-onyx underline underline-offset-2"
+              >
+                Contract ↗
+              </a>
+            }
+          >
+            {governance.loading && (
+              <div className="text-sm text-celo-onyx/50 p-4">Loading reports from Celo Mainnet…</div>
+            )}
+            {!governance.loading && governance.error && (
+              <div className="text-sm text-celo-onyx/60 p-4">{governance.error}</div>
+            )}
+            {!governance.loading && !governance.error && governance.reports.length === 0 && (
+              <div className="text-sm text-celo-onyx/60 p-4">No health reports submitted yet.</div>
+            )}
+            {governance.reports.slice(0, 5).map((r, i) => (
+              <ActionItem
+                key={`${r.timestamp}-${i}`}
+                label={r.componentName || "Component"}
+                sub={`${r.statusMessage || "—"} • ${new Date(r.timestamp * 1000).toLocaleDateString()}`}
+                badge={`${r.uptimeScore}/100`}
+              />
+            ))}
+          </SectionCard>
+
+          <SectionCard
+            title={`Project Milestones · On-chain${
+              governance.milestonesCount !== null ? ` (${governance.milestonesCount})` : ""
+            }`}
+            action={
+              <a
+                href={`https://celoscan.io/address/${governance.contractAddress}#readContract`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold text-celo-onyx/70 hover:text-celo-onyx underline underline-offset-2"
+              >
+                Read ↗
+              </a>
+            }
+          >
+            {governance.loading && (
+              <div className="text-sm text-celo-onyx/50 p-4">Loading milestones…</div>
+            )}
+            {!governance.loading && !governance.error && governance.milestones.length === 0 && (
+              <div className="text-sm text-celo-onyx/60 p-4">No milestones recorded yet.</div>
+            )}
+            {governance.milestones.slice(0, 5).map((m) => (
+              <ActionItem
+                key={m.id}
+                label={m.projectName || `Milestone #${m.id}`}
+                sub={`${m.milestoneDescription || "—"} • ${
+                  m.dateReported ? new Date(m.dateReported * 1000).toLocaleDateString() : "—"
+                }`}
+                badge={m.isCompleted ? "Done" : "In progress"}
+              />
+            ))}
+          </SectionCard>
+        </div>
       </div>
     </div>
   );
