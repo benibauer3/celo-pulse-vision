@@ -71,13 +71,17 @@ export type ProjectMilestone = {
 
 const MAX_ITEMS = 25;
 
+type CeloClient = ReturnType<typeof createCeloClient>;
+function createCeloClient(rpc: string) {
+  return createPublicClient({ chain: celo, transport: http(rpc) });
+}
+
 async function readWithFallback<T>(
-  fn: (client: ReturnType<typeof createPublicClient>) => Promise<T>,
+  fn: (client: CeloClient) => Promise<T>,
 ): Promise<T | null> {
   for (const rpc of RPCS) {
     try {
-      const client = createPublicClient({ chain: celo, transport: http(rpc) });
-      return await fn(client);
+      return await fn(createCeloClient(rpc));
     } catch (e) {
       console.error("[useGovernance] RPC failed", rpc, e);
     }
