@@ -54,7 +54,7 @@ export type Proposal = {
   id: string;
   title: string;
   request: string;
-  status: "Em votação" | "Adotada" | "Executada" | "Expirada" | "Rascunho";
+  status: "Voting" | "Adopted" | "Executed" | "Expired" | "Draft";
   category: string;
   url: string;
   yes?: string;
@@ -65,10 +65,10 @@ export type Proposal = {
 export const proposals: Proposal[] = [
   {
     id: "CGP-234",
-    title: "Burn 1.748.950 CELO devolvidos ao Community Fund",
-    request: "1.748.950 CELO",
-    status: "Expirada",
-    category: "Tesouro",
+    title: "Burn 1,748,950 CELO Returned to the Community Fund",
+    request: "1,748,950 CELO",
+    status: "Expired",
+    category: "Treasury",
     url: "https://mondo.celo.org/governance/287",
     yes: "55.6%",
     no: "13.5%",
@@ -76,9 +76,9 @@ export const proposals: Proposal[] = [
   },
   {
     id: "CGP-233",
-    title: "CELOccelerate: Proposta de Tokenomics (Temperature Check)",
-    request: "Parâmetro",
-    status: "Adotada",
+    title: "CELOccelerate: Celo Tokenomics Proposal (Temperature Check)",
+    request: "Parameter",
+    status: "Adopted",
     category: "Tokenomics",
     url: "https://mondo.celo.org/governance/286",
     yes: "100.0%",
@@ -87,10 +87,10 @@ export const proposals: Proposal[] = [
   },
   {
     id: "CGP-232",
-    title: "Celo's Next Chapter: Opera de Distribuição a Stakeholder da Rede",
-    request: "Parceria",
-    status: "Executada",
-    category: "Ecossistema",
+    title: "Celo's Next Chapter: Opera Transition from Distribution Partner to Network Stakeholder",
+    request: "Partnership",
+    status: "Executed",
+    category: "Ecosystem",
     url: "https://mondo.celo.org/governance/285",
     yes: "98.8%",
     no: "0.4%",
@@ -100,8 +100,8 @@ export const proposals: Proposal[] = [
     id: "CGP-226",
     title: "Contracts Release 15",
     request: "Upgrade",
-    status: "Executada",
-    category: "Rede",
+    status: "Executed",
+    category: "Network",
     url: "https://mondo.celo.org/governance/284",
     yes: "99.9%",
     no: "0.1%",
@@ -109,10 +109,10 @@ export const proposals: Proposal[] = [
   },
   {
     id: "CGP-230",
-    title: "Aumento de Intrinsic Gas para USDT e USDC como Fee Currencies",
-    request: "Parâmetro",
-    status: "Executada",
-    category: "Rede",
+    title: "Increase Intrinsic Gas for USDT and USDC Fee Currencies",
+    request: "Parameter",
+    status: "Executed",
+    category: "Network",
     url: "https://mondo.celo.org/governance/283",
     yes: "100.0%",
     no: "0.0%",

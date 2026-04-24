@@ -2,8 +2,8 @@ import { Link, useRouterState } from "@tanstack/react-router";
 
 const ITEMS = [
   { to: "/", label: "Home", icon: "◎" },
-  { to: "/proposals", label: "Propostas", icon: "✦" },
-  { to: "/validators", label: "Validadores", icon: "▲" },
+  { to: "/proposals", label: "Proposals", icon: "✦" },
+  { to: "/validators", label: "Validators", icon: "▲" },
 ] as const;
 
 export function MobileBottomNav() {

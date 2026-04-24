@@ -14,16 +14,16 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center bg-celo-cream px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-serif text-celo-onyx">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-celo-onyx">Página não encontrada</h2>
+        <h2 className="mt-4 text-xl font-semibold text-celo-onyx">Page not found</h2>
         <p className="mt-2 text-sm text-celo-onyx/60">
-          O endereço acessado não existe ou foi movido.
+          The address you tried doesn't exist or has been moved.
         </p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-full bg-celo-onyx px-5 py-2.5 text-sm font-medium text-celo-cream hover:bg-celo-onyx/90"
           >
-            Voltar ao início
+            Go home
           </Link>
         </div>
       </div>
@@ -37,10 +37,10 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Celo Pulse — Governance Dashboard" },
-      { name: "description", content: "Transparência absoluta para o tesouro, governança e ecossistema da rede Celo." },
+      { name: "description", content: "Absolute transparency for the Celo network's treasury, governance and ecosystem." },
       { name: "author", content: "Beni Bauer" },
       { property: "og:title", content: "Celo Pulse — Governance Dashboard" },
-      { property: "og:description", content: "Monitore tesouro, propostas, validadores e o programa Proof of Ship em tempo real." },
+      { property: "og:description", content: "Monitor treasury, proposals, validators and the Proof of Ship program in real time." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -61,7 +61,7 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
