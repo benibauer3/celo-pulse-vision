@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
 import { SectionCard, Kpi } from "@/components/ui-celo";
 import { fetchValidatorCount, fetchLatestBlock } from "@/lib/celo";
 import { validatorRows } from "@/data/projects";
@@ -17,14 +18,29 @@ export const Route = createFileRoute("/validators")({
 function ValidatorsPage() {
   const [count, setCount] = useState<number | null>(null);
   const [block, setBlock] = useState<bigint | null>(null);
+  const [delegated, setDelegated] = useState<string | null>(null);
+  const { isConnected } = useAccount();
 
   useEffect(() => {
     fetchValidatorCount().then(setCount);
     fetchLatestBlock().then(setBlock);
   }, []);
 
+  const handleDelegate = (name: string) => {
+    if (!isConnected) {
+      setDelegated(`Conecte sua carteira para delegar a ${name}.`);
+      return;
+    }
+    setDelegated(`Solicitação de delegação enviada a ${name}.`);
+  };
+
   return (
-    <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 sm:pt-16">
+    <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 sm:pt-16 pb-24 md:pb-10">
+      {delegated && (
+        <div className="mb-6 rounded-xl bg-celo-yellow border border-celo-onyx px-4 py-3 text-sm text-celo-onyx">
+          {delegated}
+        </div>
+      )}
       <header className="mb-10">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-celo-onyx/50 mb-3">
           Validator Monitoring
@@ -54,6 +70,7 @@ function ValidatorsPage() {
                 <th className="py-3 px-3 text-right">Voting Power</th>
                 <th className="py-3 px-3 text-right">Uptime</th>
                 <th className="py-3 px-3 text-right">Status</th>
+                <th className="py-3 px-3 text-right">Ação</th>
               </tr>
             </thead>
             <tbody>
@@ -73,6 +90,14 @@ function ValidatorsPage() {
                     >
                       {v.status}
                     </span>
+                  </td>
+                  <td className="py-3 px-3 text-right">
+                    <button
+                      onClick={() => handleDelegate(v.name)}
+                      className="text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-celo-onyx text-celo-cream hover:bg-celo-onyx/90"
+                    >
+                      Delegar
+                    </button>
                   </td>
                 </tr>
               ))}
