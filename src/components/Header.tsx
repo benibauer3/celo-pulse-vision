@@ -38,16 +38,18 @@ export function Header() {
   return (
     <header className="border-b border-celo-onyx/10 bg-celo-cream/80 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Celo Pulse home">
+        <Link to="/" className="flex items-center gap-4 shrink-0" aria-label="Celo Pulse home">
+          {/* Celo wordmark — Onyx on Snow per Celo brand guidelines. Do not distort. */}
           <img
             src={celoLogo}
             alt="Celo"
-            className="h-8 sm:h-9 w-auto"
+            className="h-7 sm:h-8 w-auto select-none"
             width={120}
-            height={36}
+            height={32}
+            draggable={false}
           />
-          <span className="hidden sm:inline-block h-6 w-px bg-celo-onyx/20" aria-hidden />
-          <span className="hidden sm:inline-block font-serif text-celo-onyx font-bold text-lg tracking-tight">
+          <span className="hidden sm:inline-block h-5 w-px bg-celo-onyx/20" aria-hidden />
+          <span className="hidden sm:inline-block font-serif text-celo-onyx font-semibold text-base tracking-tight">
             Pulse
           </span>
         </Link>
