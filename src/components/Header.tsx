@@ -6,11 +6,11 @@ import { isMiniPay, truncateAddress } from "@/lib/minipay";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/proposals", label: "Propostas" },
-  { to: "/governance", label: "Governança" },
-  { to: "/ecosystem", label: "Ecossistema" },
-  { to: "/validators", label: "Validadores" },
-  { to: "/report", label: "Submeter" },
+  { to: "/proposals", label: "Proposals" },
+  { to: "/governance", label: "Governance" },
+  { to: "/ecosystem", label: "Ecosystem" },
+  { to: "/validators", label: "Validators" },
+  { to: "/report", label: "Submit" },
 ] as const;
 
 export function Header() {
@@ -31,8 +31,8 @@ export function Header() {
   const label = isConnected
     ? truncateAddress(address)
     : inMiniPay
-      ? "Conectando..."
-      : "Conectar Carteira";
+      ? "Connecting..."
+      : "Connect Wallet";
 
   return (
     <header className="border-b border-celo-onyx/10 bg-celo-cream/80 backdrop-blur-sm sticky top-0 z-50">

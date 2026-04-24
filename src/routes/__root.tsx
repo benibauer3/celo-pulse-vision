@@ -14,16 +14,16 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center bg-celo-cream px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-serif text-celo-onyx">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-celo-onyx">Página não encontrada</h2>
+        <h2 className="mt-4 text-xl font-semibold text-celo-onyx">Page not found</h2>
         <p className="mt-2 text-sm text-celo-onyx/60">
-          O endereço acessado não existe ou foi movido.
+          The address you tried doesn't exist or has been moved.
         </p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-full bg-celo-onyx px-5 py-2.5 text-sm font-medium text-celo-cream hover:bg-celo-onyx/90"
           >
-            Voltar ao início
+            Go home
           </Link>
         </div>
       </div>
