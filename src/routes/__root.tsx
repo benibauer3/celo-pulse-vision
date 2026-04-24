@@ -37,10 +37,10 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Celo Pulse — Governance Dashboard" },
-      { name: "description", content: "Transparência absoluta para o tesouro, governança e ecossistema da rede Celo." },
+      { name: "description", content: "Absolute transparency for the Celo network's treasury, governance and ecosystem." },
       { name: "author", content: "Beni Bauer" },
       { property: "og:title", content: "Celo Pulse — Governance Dashboard" },
-      { property: "og:description", content: "Monitore tesouro, propostas, validadores e o programa Proof of Ship em tempo real." },
+      { property: "og:description", content: "Monitor treasury, proposals, validators and the Proof of Ship program in real time." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -61,7 +61,7 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
