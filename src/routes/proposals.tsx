@@ -74,9 +74,17 @@ function ProposalsPage() {
         <h1 className="font-serif text-5xl sm:text-6xl text-celo-onyx leading-none tracking-tight mb-4">
           Propostas em votação
         </h1>
-        <p className="text-base sm:text-lg text-celo-onyx/70 max-w-2xl">
-          Vote diretamente nas CGPs ativas. {inMiniPay ? "Conectado via MiniPay." : "Conecte sua carteira para participar."}
+        <p className="text-base sm:text-lg text-celo-onyx/70 max-w-2xl mb-6">
+          Vote diretamente nas CGPs do Celo Mondo. {inMiniPay ? "Conectado via MiniPay." : "Conecte sua carteira para participar."}
         </p>
+        <a
+          href="https://forum.celo.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full bg-celo-onyx text-celo-cream px-5 py-2.5 text-sm font-semibold hover:bg-celo-onyx/90 transition"
+        >
+          Abrir Fórum Celo ↗
+        </a>
       </header>
 
       <div className="grid grid-cols-1 gap-4">
