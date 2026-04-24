@@ -5,6 +5,7 @@ import { WagmiProvider } from "wagmi";
 import { wagmiConfig } from "@/lib/wagmi";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MobileBottomNav } from "@/components/MobileBottomNav";
 
 import appCss from "../styles.css?url";
 
@@ -83,6 +84,8 @@ function RootComponent() {
             <Outlet />
           </main>
           <Footer />
+          <MobileBottomNav />
+          <div className="h-16 md:hidden" aria-hidden />
         </div>
       </QueryClientProvider>
     </WagmiProvider>
