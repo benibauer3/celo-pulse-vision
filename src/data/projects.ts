@@ -54,15 +54,68 @@ export type Proposal = {
   id: string;
   title: string;
   request: string;
-  status: "Em votação" | "Revisão" | "Aprovada" | "Rascunho";
+  status: "Em votação" | "Adotada" | "Executada" | "Expirada" | "Rascunho";
   category: string;
   url: string;
+  yes?: string;
+  no?: string;
+  abstain?: string;
 };
 
 export const proposals: Proposal[] = [
-  { id: "CGP-198", title: "Refill Community Fund Q1 2026", request: "5.000.000 CELO", status: "Em votação", category: "Tesouro", url: "https://mondo.celo.org/governance" },
-  { id: "CGP-199", title: "MiniPay Grants Program — Cohort 4", request: "1.200.000 CELO", status: "Em votação", category: "Ecossistema", url: "https://mondo.celo.org/governance" },
-  { id: "CGP-200", title: "Proof of Ship — Recompensas Trimestrais", request: "800.000 CELO", status: "Revisão", category: "Builders", url: "https://mondo.celo.org/governance" },
-  { id: "CGP-201", title: "Real Use Case: Pagamentos África Subsaariana", request: "2.500.000 CELO", status: "Revisão", category: "Adoção", url: "https://mondo.celo.org/governance" },
-  { id: "CGP-202", title: "Validator Rewards Adjustment", request: "Parâmetro", status: "Rascunho", category: "Rede", url: "https://mondo.celo.org/governance" },
+  {
+    id: "CGP-234",
+    title: "Burn 1.748.950 CELO devolvidos ao Community Fund",
+    request: "1.748.950 CELO",
+    status: "Expirada",
+    category: "Tesouro",
+    url: "https://mondo.celo.org/governance/287",
+    yes: "55.6%",
+    no: "13.5%",
+    abstain: "30.9%",
+  },
+  {
+    id: "CGP-233",
+    title: "CELOccelerate: Proposta de Tokenomics (Temperature Check)",
+    request: "Parâmetro",
+    status: "Adotada",
+    category: "Tokenomics",
+    url: "https://mondo.celo.org/governance/286",
+    yes: "100.0%",
+    no: "0.0%",
+    abstain: "0.0%",
+  },
+  {
+    id: "CGP-232",
+    title: "Celo's Next Chapter: Opera de Distribuição a Stakeholder da Rede",
+    request: "Parceria",
+    status: "Executada",
+    category: "Ecossistema",
+    url: "https://mondo.celo.org/governance/285",
+    yes: "98.8%",
+    no: "0.4%",
+    abstain: "0.8%",
+  },
+  {
+    id: "CGP-226",
+    title: "Contracts Release 15",
+    request: "Upgrade",
+    status: "Executada",
+    category: "Rede",
+    url: "https://mondo.celo.org/governance/284",
+    yes: "99.9%",
+    no: "0.1%",
+    abstain: "0.0%",
+  },
+  {
+    id: "CGP-230",
+    title: "Aumento de Intrinsic Gas para USDT e USDC como Fee Currencies",
+    request: "Parâmetro",
+    status: "Executada",
+    category: "Rede",
+    url: "https://mondo.celo.org/governance/283",
+    yes: "100.0%",
+    no: "0.0%",
+    abstain: "0.0%",
+  },
 ];
