@@ -6,6 +6,7 @@ import { isMiniPay, truncateAddress } from "@/lib/minipay";
 
 const NAV = [
   { to: "/", label: "Home" },
+  { to: "/proposals", label: "Propostas" },
   { to: "/governance", label: "Governança" },
   { to: "/ecosystem", label: "Ecossistema" },
   { to: "/validators", label: "Validadores" },
@@ -64,19 +65,25 @@ export function Header() {
           })}
         </nav>
 
-        <button
-          onClick={() => {
-            if (isConnected && !inMiniPay) disconnect();
-            else if (!isConnected) connect({ connector: injected({ target: "metaMask" }) });
-          }}
-          className={`shrink-0 rounded-full px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold transition-colors ${
-            isConnected
-              ? "bg-celo-green text-white"
-              : "bg-celo-onyx text-celo-cream hover:bg-celo-onyx/90"
-          }`}
-        >
-          {label}
-        </button>
+        {inMiniPay && isConnected ? (
+          <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-celo-green text-white px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold">
+            <span className="text-[10px]">●</span> Verified · {truncateAddress(address)}
+          </span>
+        ) : inMiniPay ? null : (
+          <button
+            onClick={() => {
+              if (isConnected) disconnect();
+              else connect({ connector: injected({ target: "metaMask" }) });
+            }}
+            className={`shrink-0 rounded-full px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold transition-colors ${
+              isConnected
+                ? "bg-celo-green text-white"
+                : "bg-celo-onyx text-celo-cream hover:bg-celo-onyx/90"
+            }`}
+          >
+            {label}
+          </button>
+        )}
       </div>
 
       {/* Mobile nav */}
