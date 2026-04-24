@@ -29,6 +29,7 @@ function Index() {
   const [price, setPrice] = useState<number | null>(null);
   const [validators, setValidators] = useState<number | null>(null);
   const [block, setBlock] = useState<bigint | null>(null);
+  const governance = useGovernance();
 
   useEffect(() => {
     fetchCommunityFundBalance().then((r) => {
