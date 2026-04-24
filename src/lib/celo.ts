@@ -58,7 +58,7 @@ const validatorsAbi = [
   },
 ] as const;
 
-export async function fetchCommunityFundBalance(): Promise<string> {
+export async function fetchCommunityFundBalance(): Promise<{ formatted: string; raw: number }> {
   for (const rpc of RPCS) {
     try {
       const client = createPublicClient({ chain: celo, transport: http(rpc) });
@@ -68,14 +68,30 @@ export async function fetchCommunityFundBalance(): Promise<string> {
         functionName: "balanceOf",
         args: [COMMUNITY_FUND],
       });
-      return new Intl.NumberFormat("en-US").format(
-        Math.floor(Number(formatEther(data as bigint))),
-      );
+      const raw = Number(formatEther(data as bigint));
+      return {
+        formatted: new Intl.NumberFormat("en-US").format(Math.floor(raw)),
+        raw,
+      };
     } catch (e) {
       console.error("RPC failed", rpc, e);
     }
   }
-  return "124,532,091";
+  return { formatted: "124,532,091", raw: 124532091 };
+}
+
+export async function fetchCeloPriceUsd(): Promise<number | null> {
+  try {
+    const res = await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=celo&vs_currencies=usd",
+    );
+    if (!res.ok) return null;
+    const json = (await res.json()) as { celo?: { usd?: number } };
+    return json.celo?.usd ?? null;
+  } catch (e) {
+    console.error("Price fetch failed", e);
+    return null;
+  }
 }
 
 export async function fetchValidatorCount(): Promise<number> {
