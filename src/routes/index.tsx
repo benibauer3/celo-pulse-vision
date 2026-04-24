@@ -10,6 +10,7 @@ import {
 import { truncateAddress } from "@/lib/minipay";
 import { SectionCard, ActionItem, Kpi } from "@/components/ui-celo";
 import { proposals } from "@/data/projects";
+import { useGovernance } from "@/hooks/useGovernance";
 
 export const Route = createFileRoute("/")({
   head: () => ({
