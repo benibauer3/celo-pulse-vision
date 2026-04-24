@@ -8,8 +8,8 @@ import { validatorRows } from "@/data/projects";
 export const Route = createFileRoute("/validators")({
   head: () => ({
     meta: [
-      { title: "Validadores — Celo Pulse" },
-      { name: "description", content: "Monitoramento de uptime, voting power e saúde dos validadores da rede Celo." },
+      { title: "Validators — Celo Pulse" },
+      { name: "description", content: "Uptime, voting power and health monitoring for Celo validators." },
     ],
   }),
   component: ValidatorsPage,
@@ -28,10 +28,10 @@ function ValidatorsPage() {
 
   const handleDelegate = (name: string) => {
     if (!isConnected) {
-      setDelegated(`Conecte sua carteira para delegar a ${name}.`);
+      setDelegated(`Connect your wallet to delegate to ${name}.`);
       return;
     }
-    setDelegated(`Solicitação de delegação enviada a ${name}.`);
+    setDelegated(`Delegation request sent to ${name}.`);
   };
 
   return (
@@ -46,31 +46,31 @@ function ValidatorsPage() {
           Validator Monitoring
         </p>
         <h1 className="font-serif text-5xl sm:text-6xl text-celo-onyx leading-none tracking-tight mb-4">
-          Saúde da rede Celo
+          Celo network health
         </h1>
         <p className="text-base sm:text-lg text-celo-onyx/70 max-w-2xl">
-          Performance, voting power e uptime dos validadores eleitos no consenso do Celo Mainnet.
+          Performance, voting power and uptime of validators elected in Celo Mainnet consensus.
         </p>
       </header>
 
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
-        <Kpi label="Validadores" value={count !== null ? `${count}` : "—"} hint="Registrados on-chain" accent />
-        <Kpi label="Uptime médio" value="99.93%" hint="Últimas 24h" />
-        <Kpi label="Bloco atual" value={block ? `#${block.toString()}` : "—"} hint="Celo Mainnet" />
-        <Kpi label="Block time" value="5.0s" hint="Média confirmada" />
+        <Kpi label="Validators" value={count !== null ? `${count}` : "—"} hint="Registered on-chain" accent />
+        <Kpi label="Average uptime" value="99.93%" hint="Last 24h" />
+        <Kpi label="Latest block" value={block ? `#${block.toString()}` : "—"} hint="Celo Mainnet" />
+        <Kpi label="Block time" value="5.0s" hint="Confirmed average" />
       </section>
 
-      <SectionCard title="Top Validadores · Voting Power & Uptime">
+      <SectionCard title="Top Validators · Voting Power & Uptime">
         <div className="overflow-x-auto -mx-2 sm:mx-0">
           <table className="w-full text-sm min-w-[520px]">
             <thead>
               <tr className="text-left text-[11px] uppercase tracking-wider text-celo-onyx/50 border-b border-celo-onyx/10">
-                <th className="py-3 px-3">Validador</th>
-                <th className="py-3 px-3">Grupo</th>
+                <th className="py-3 px-3">Validator</th>
+                <th className="py-3 px-3">Group</th>
                 <th className="py-3 px-3 text-right">Voting Power</th>
                 <th className="py-3 px-3 text-right">Uptime</th>
                 <th className="py-3 px-3 text-right">Status</th>
-                <th className="py-3 px-3 text-right">Ação</th>
+                <th className="py-3 px-3 text-right">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -96,7 +96,7 @@ function ValidatorsPage() {
                       onClick={() => handleDelegate(v.name)}
                       className="text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-celo-onyx text-celo-cream hover:bg-celo-onyx/90"
                     >
-                      Delegar
+                      Delegate
                     </button>
                   </td>
                 </tr>

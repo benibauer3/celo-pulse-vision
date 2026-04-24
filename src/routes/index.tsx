@@ -14,8 +14,8 @@ import { proposals } from "@/data/projects";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Celo Pulse — Tesouro & Governança" },
-      { name: "description", content: "Saldo do Community Fund, propostas aprovadas e saúde do ecossistema Celo." },
+      { title: "Celo Pulse — Treasury & Governance" },
+      { name: "description", content: "Community Fund balance, approved proposals and ecosystem health for the Celo network." },
     ],
   }),
   component: Index,
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const { address, isConnected } = useAccount();
-  const [balance, setBalance] = useState<string>("Carregando...");
+  const [balance, setBalance] = useState<string>("Loading...");
   const [balanceRaw, setBalanceRaw] = useState<number | null>(null);
   const [price, setPrice] = useState<number | null>(null);
   const [validators, setValidators] = useState<number | null>(null);
@@ -39,8 +39,8 @@ function Index() {
     fetchLatestBlock().then(setBlock);
   }, []);
 
-  const approved = proposals.filter((p) => p.status === "Executada" || p.status === "Adotada").length;
-  const voting = proposals.filter((p) => p.status === "Em votação").length;
+  const approved = proposals.filter((p) => p.status === "Executed" || p.status === "Adopted").length;
+  const voting = proposals.filter((p) => p.status === "Voting").length;
   const totalCgps = 234;
 
   const usdValue =
@@ -74,13 +74,13 @@ function Index() {
               </span>
             </>
           ) : (
-            <span className="text-celo-onyx/40 text-base">Calculando valor em USD…</span>
+            <span className="text-celo-onyx/40 text-base">Calculating USD value…</span>
           )}
         </p>
         <p className="text-base sm:text-lg text-celo-onyx/70 max-w-2xl leading-relaxed mb-6">
           {isConnected
-            ? `Bem-vindo. Sua carteira ${truncateAddress(address)} está conectada à rede Celo.`
-            : "Tesouro do Community Fund alimentado pelos epoch rewards do protocolo Celo."}
+            ? `Welcome. Your wallet ${truncateAddress(address)} is connected to the Celo network.`
+            : "Community Fund treasury powered by epoch rewards from the Celo protocol."}
         </p>
         <div className="flex flex-wrap gap-3">
           <a
@@ -89,7 +89,7 @@ function Index() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-celo-onyx text-celo-cream px-5 py-2.5 text-sm font-semibold hover:bg-celo-onyx/90 transition"
           >
-            Discussões no Fórum Celo ↗
+            Discussions on Celo Forum ↗
           </a>
           <a
             href="https://mondo.celo.org/governance"
@@ -97,7 +97,7 @@ function Index() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-celo-yellow text-celo-onyx border-2 border-celo-onyx px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition"
           >
-            Ver no Celo Mondo ↗
+            View on Celo Mondo ↗
           </a>
           <a
             href="https://docs.celo.org/home/protocol/epoch-rewards/community-fund"
@@ -105,7 +105,7 @@ function Index() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-white text-celo-onyx border border-celo-onyx/30 px-5 py-2.5 text-sm font-semibold hover:bg-celo-cream transition"
           >
-            Sobre o Community Fund ↗
+            About the Community Fund ↗
           </a>
         </div>
       </section>
@@ -113,32 +113,32 @@ function Index() {
       {/* KPI bar */}
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-14 sm:mb-20">
         <Kpi
-          label="Total de CGPs"
+          label="Total CGPs"
           value={`${totalCgps}`}
-          hint="Propostas registradas"
+          hint="Proposals on record"
           accent
         />
         <Kpi
-          label="Aprovadas / Executadas"
+          label="Approved / Executed"
           value={`${approved}`}
-          hint="Últimas no Mondo"
+          hint="Latest from Mondo"
         />
         <Kpi
-          label="Em votação"
+          label="In voting"
           value={`${voting}`}
-          hint="Aguardando quorum"
+          hint="Awaiting quorum"
         />
         <Kpi
           label="Network Health"
           value="99.9%"
-          hint={validators !== null ? `${validators} validadores` : "Uptime médio"}
+          hint={validators !== null ? `${validators} validators` : "Average uptime"}
         />
       </section>
 
       {/* Recent proposals */}
       <div className="grid grid-cols-1 gap-5 mb-10">
         <SectionCard
-          title="Propostas Recentes · Celo Mondo"
+          title="Recent Proposals · Celo Mondo"
           action={
             <a
               href="https://mondo.celo.org/governance"
@@ -146,7 +146,7 @@ function Index() {
               rel="noopener noreferrer"
               className="text-xs font-semibold text-celo-onyx/70 hover:text-celo-onyx underline underline-offset-2"
             >
-              Ver todas ↗
+              View all ↗
             </a>
           }
         >
@@ -154,7 +154,7 @@ function Index() {
             <ActionItem
               key={p.id}
               label={`${p.id}: ${p.title}`}
-              sub={`${p.category}${p.yes ? ` • Sim ${p.yes}` : ""}${p.no ? ` • Não ${p.no}` : ""}`}
+              sub={`${p.category}${p.yes ? ` • Yes ${p.yes}` : ""}${p.no ? ` • No ${p.no}` : ""}`}
               badge={p.status}
               href={p.url}
             />
@@ -162,29 +162,29 @@ function Index() {
         </SectionCard>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <SectionCard title="Comunidade & Discussão">
+          <SectionCard title="Community & Discussion">
             <ActionItem
-              label="Fórum oficial Celo"
-              sub="Debata propostas antes do on-chain"
+              label="Official Celo Forum"
+              sub="Debate proposals before they go on-chain"
               badge="Live"
               href="https://forum.celo.org/"
             />
             <ActionItem
-              label="GitHub CGPs"
-              sub="Repositório oficial das Celo Governance Proposals"
+              label="CGPs on GitHub"
+              sub="Official repository of Celo Governance Proposals"
               href="https://github.com/celo-org/governance"
             />
           </SectionCard>
 
-          <SectionCard title="Validadores & Rede">
+          <SectionCard title="Validators & Network">
             <ActionItem
               label="Network Health Status"
-              sub="Monitoramento de Uptime e Performance"
+              sub="Uptime and performance monitoring"
               badge="99.9%"
               href="/validators"
             />
             <ActionItem
-              label={block ? `Bloco atual #${block.toString()}` : "Bloco atual —"}
+              label={block ? `Latest block #${block.toString()}` : "Latest block —"}
               sub="Celo Mainnet • chainId 42220"
               href="https://celoscan.io"
             />

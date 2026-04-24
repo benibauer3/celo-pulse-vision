@@ -5,16 +5,16 @@ import { proposals } from "@/data/projects";
 export const Route = createFileRoute("/governance")({
   head: () => ({
     meta: [
-      { title: "Governança — Celo Pulse" },
-      { name: "description", content: "Propostas CGP em votação, focadas em casos de uso real e crescimento do ecossistema Celo." },
+      { title: "Governance — Celo Pulse" },
+      { name: "description", content: "Latest CGP proposals from Celo Mondo, focused on real use cases and ecosystem growth." },
     ],
   }),
   component: GovernancePage,
 });
 
 function GovernancePage() {
-  const treasury = proposals.filter((p) => p.category === "Tesouro" || p.category === "Tokenomics");
-  const network = proposals.filter((p) => p.category === "Rede" || p.category === "Ecossistema");
+  const treasury = proposals.filter((p) => p.category === "Treasury" || p.category === "Tokenomics");
+  const network = proposals.filter((p) => p.category === "Network" || p.category === "Ecosystem");
 
   return (
     <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 sm:pt-16 pb-24 md:pb-10">
@@ -23,10 +23,10 @@ function GovernancePage() {
           Celo Governance Proposals
         </p>
         <h1 className="font-serif text-5xl sm:text-6xl text-celo-onyx leading-none tracking-tight mb-4">
-          Governança em ação
+          Governance in action
         </h1>
         <p className="text-base sm:text-lg text-celo-onyx/70 max-w-2xl mb-6">
-          Propostas CGPs mais recentes do Celo Mondo — incluindo a CGP-234.
+          Most recent CGPs from Celo Mondo — including CGP-234.
         </p>
         <a
           href="https://forum.celo.org/"
@@ -34,29 +34,29 @@ function GovernancePage() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full bg-celo-onyx text-celo-cream px-5 py-2.5 text-sm font-semibold hover:bg-celo-onyx/90 transition"
         >
-          Discutir no Fórum Celo ↗
+          Discuss on Celo Forum ↗
         </a>
       </header>
 
       <div className="grid grid-cols-1 gap-5">
-        <SectionCard title="Tesouro & Tokenomics">
+        <SectionCard title="Treasury & Tokenomics">
           {treasury.map((p) => (
             <ActionItem
               key={p.id}
               label={`${p.id}: ${p.title}`}
-              sub={`${p.category} • Sim ${p.yes ?? "—"} · Não ${p.no ?? "—"}`}
+              sub={`${p.category} • Yes ${p.yes ?? "—"} · No ${p.no ?? "—"}`}
               badge={p.status}
               href={p.url}
             />
           ))}
         </SectionCard>
 
-        <SectionCard title="Rede & Ecossistema">
+        <SectionCard title="Network & Ecosystem">
           {network.map((p) => (
             <ActionItem
               key={p.id}
               label={`${p.id}: ${p.title}`}
-              sub={`${p.category} • Sim ${p.yes ?? "—"} · Não ${p.no ?? "—"}`}
+              sub={`${p.category} • Yes ${p.yes ?? "—"} · No ${p.no ?? "—"}`}
               badge={p.status}
               href={p.url}
             />

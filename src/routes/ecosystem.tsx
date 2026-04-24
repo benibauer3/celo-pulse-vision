@@ -5,8 +5,8 @@ import { proofOfShipProjects } from "@/data/projects";
 export const Route = createFileRoute("/ecosystem")({
   head: () => ({
     meta: [
-      { title: "Ecossistema — Proof of Ship" },
-      { name: "description", content: "20 projetos no programa Proof of Ship da rede Celo, com status, categoria e milestones." },
+      { title: "Ecosystem — Celo Pulse" },
+      { name: "description", content: "20 projects in the Celo Proof of Ship pipeline, with status, category and milestones." },
     ],
   }),
   component: EcosystemPage,
@@ -28,16 +28,16 @@ function EcosystemPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 sm:pt-16">
+    <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 sm:pt-16 pb-24 md:pb-10">
       <header className="mb-12">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-celo-onyx/50 mb-3">
           Proof of Ship Pipeline
         </p>
         <h1 className="font-serif text-5xl sm:text-6xl text-celo-onyx leading-none tracking-tight mb-4">
-          20 projetos construindo no Celo
+          20 projects building on Celo
         </h1>
         <p className="text-base sm:text-lg text-celo-onyx/70 max-w-2xl">
-          Acompanhamento ao vivo dos projetos do programa Proof of Ship — desde MVPs em revisão até produtos com tração.
+          Live tracking of Proof of Ship projects — from MVPs in review to products with traction.
         </p>
         <div className="flex flex-wrap gap-2 mt-6">
           {(Object.entries(byStatus) as [keyof typeof byStatus, number][]).map(([k, v]) => (
@@ -51,7 +51,7 @@ function EcosystemPage() {
         </div>
       </header>
 
-      <SectionCard title="Pipeline · 20 Projetos">
+      <SectionCard title="Pipeline · 20 Projects">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {proofOfShipProjects.map((p) => (
             <div

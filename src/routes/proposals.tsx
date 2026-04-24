@@ -8,10 +8,10 @@ import { isMiniPay } from "@/lib/minipay";
 export const Route = createFileRoute("/proposals")({
   head: () => ({
     meta: [
-      { title: "Propostas CGP — Celo Pulse" },
-      { name: "description", content: "Vote em propostas de governança Celo (CGPs) diretamente da sua carteira ou MiniPay." },
-      { property: "og:title", content: "Propostas CGP — Celo Pulse" },
-      { property: "og:description", content: "Acompanhe e vote em propostas ativas da rede Celo." },
+      { title: "CGP Proposals — Celo Pulse" },
+      { name: "description", content: "Vote on Celo Governance Proposals (CGPs) directly from your wallet or MiniPay." },
+      { property: "og:title", content: "CGP Proposals — Celo Pulse" },
+      { property: "og:description", content: "Track and vote on active proposals on the Celo network." },
     ],
   }),
   component: ProposalsPage,
@@ -43,7 +43,7 @@ function ProposalsPage() {
 
   const handleVote = async (id: string, value: VoteValue) => {
     if (!isConnected) {
-      setFeedback((f) => ({ ...f, [id]: "Conecte sua carteira para votar." }));
+      setFeedback((f) => ({ ...f, [id]: "Connect your wallet to vote." }));
       return;
     }
     setPendingId(id);
@@ -56,9 +56,9 @@ function ProposalsPage() {
         functionName: "vote",
         args: [numericId, 0n, valueMap[value]],
       });
-      setFeedback((f) => ({ ...f, [id]: `Voto "${value}" enviado.` }));
+      setFeedback((f) => ({ ...f, [id]: `"${value}" vote submitted.` }));
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Erro ao enviar voto.";
+      const msg = err instanceof Error ? err.message : "Failed to submit vote.";
       setFeedback((f) => ({ ...f, [id]: msg.slice(0, 120) }));
     } finally {
       setPendingId(null);
@@ -72,10 +72,10 @@ function ProposalsPage() {
           Celo Governance Proposals
         </p>
         <h1 className="font-serif text-5xl sm:text-6xl text-celo-onyx leading-none tracking-tight mb-4">
-          Propostas em votação
+          Proposals in voting
         </h1>
         <p className="text-base sm:text-lg text-celo-onyx/70 max-w-2xl mb-6">
-          Vote diretamente nas CGPs do Celo Mondo. {inMiniPay ? "Conectado via MiniPay." : "Conecte sua carteira para participar."}
+          Vote directly on Celo Mondo CGPs. {inMiniPay ? "Connected via MiniPay." : "Connect your wallet to participate."}
         </p>
         <a
           href="https://forum.celo.org/"
@@ -83,7 +83,7 @@ function ProposalsPage() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full bg-celo-onyx text-celo-cream px-5 py-2.5 text-sm font-semibold hover:bg-celo-onyx/90 transition"
         >
-          Abrir Fórum Celo ↗
+          Open Celo Forum ↗
         </a>
       </header>
 
@@ -122,7 +122,7 @@ function ProposalsPage() {
                 {p.title}
               </h2>
               <p className="text-sm text-celo-onyx/70 mb-5">
-                Solicitação: <span className="font-semibold text-celo-onyx">{p.request}</span>
+                Request: <span className="font-semibold text-celo-onyx">{p.request}</span>
               </p>
 
               <div className="grid grid-cols-3 gap-2">
@@ -131,21 +131,21 @@ function ProposalsPage() {
                   onClick={() => handleVote(p.id, "Yes")}
                   className="rounded-full py-2.5 text-sm font-semibold bg-celo-green text-white hover:opacity-90 disabled:opacity-50 transition"
                 >
-                  {voting ? "..." : "Sim"}
+                  {voting ? "..." : "Yes"}
                 </button>
                 <button
                   disabled={voting}
                   onClick={() => handleVote(p.id, "No")}
                   className="rounded-full py-2.5 text-sm font-semibold bg-celo-onyx text-celo-cream hover:opacity-90 disabled:opacity-50 transition"
                 >
-                  Não
+                  No
                 </button>
                 <button
                   disabled={voting}
                   onClick={() => handleVote(p.id, "Abstain")}
                   className="rounded-full py-2.5 text-sm font-semibold bg-white text-celo-onyx border border-celo-onyx/30 hover:bg-celo-cream disabled:opacity-50 transition"
                 >
-                  Abster
+                  Abstain
                 </button>
               </div>
 
