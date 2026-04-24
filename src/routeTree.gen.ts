@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ValidatorsRouteImport } from './routes/validators'
 import { Route as ReportRouteImport } from './routes/report'
+import { Route as ProposalsRouteImport } from './routes/proposals'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as EcosystemRouteImport } from './routes/ecosystem'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,6 +24,11 @@ const ValidatorsRoute = ValidatorsRouteImport.update({
 const ReportRoute = ReportRouteImport.update({
   id: '/report',
   path: '/report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProposalsRoute = ProposalsRouteImport.update({
+  id: '/proposals',
+  path: '/proposals',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GovernanceRoute = GovernanceRouteImport.update({
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ecosystem': typeof EcosystemRoute
   '/governance': typeof GovernanceRoute
+  '/proposals': typeof ProposalsRoute
   '/report': typeof ReportRoute
   '/validators': typeof ValidatorsRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ecosystem': typeof EcosystemRoute
   '/governance': typeof GovernanceRoute
+  '/proposals': typeof ProposalsRoute
   '/report': typeof ReportRoute
   '/validators': typeof ValidatorsRoute
 }
@@ -60,19 +68,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/ecosystem': typeof EcosystemRoute
   '/governance': typeof GovernanceRoute
+  '/proposals': typeof ProposalsRoute
   '/report': typeof ReportRoute
   '/validators': typeof ValidatorsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ecosystem' | '/governance' | '/report' | '/validators'
+  fullPaths:
+    | '/'
+    | '/ecosystem'
+    | '/governance'
+    | '/proposals'
+    | '/report'
+    | '/validators'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ecosystem' | '/governance' | '/report' | '/validators'
+  to:
+    | '/'
+    | '/ecosystem'
+    | '/governance'
+    | '/proposals'
+    | '/report'
+    | '/validators'
   id:
     | '__root__'
     | '/'
     | '/ecosystem'
     | '/governance'
+    | '/proposals'
     | '/report'
     | '/validators'
   fileRoutesById: FileRoutesById
@@ -81,6 +103,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EcosystemRoute: typeof EcosystemRoute
   GovernanceRoute: typeof GovernanceRoute
+  ProposalsRoute: typeof ProposalsRoute
   ReportRoute: typeof ReportRoute
   ValidatorsRoute: typeof ValidatorsRoute
 }
@@ -99,6 +122,13 @@ declare module '@tanstack/react-router' {
       path: '/report'
       fullPath: '/report'
       preLoaderRoute: typeof ReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proposals': {
+      id: '/proposals'
+      path: '/proposals'
+      fullPath: '/proposals'
+      preLoaderRoute: typeof ProposalsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/governance': {
@@ -129,9 +159,19 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EcosystemRoute: EcosystemRoute,
   GovernanceRoute: GovernanceRoute,
+  ProposalsRoute: ProposalsRoute,
   ReportRoute: ReportRoute,
   ValidatorsRoute: ValidatorsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
